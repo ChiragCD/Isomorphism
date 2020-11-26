@@ -65,7 +65,12 @@ class indexer(object):
             
             print("Warning: Hashing key with degree neighbourhood")     ## Use alternative key hashing
 
-            sorted_key.sort(key=(lambda i: list(self.get_deg_nbh(i))))
+            neighbourhoods = [self.get_deg_nbh(i) for i in sorted_key]  ## Sort by hashed neighborhood
+            temps = list(range(self.top_count))
+            indexer.arraysort(temps, neighbourhoods)
+            sorted_key = np.array(sorted_key)[temps]
+
+            # sorted_key.sort(key=(lambda i: list(self.get_deg_nbh(i))))
             for i in range(1, self.top_count):                          ## Ensure no further duplicates. If any, give up
                 if(self.deg[sorted_key[i]] != self.deg[sorted_key[i-1]]):
                     continue

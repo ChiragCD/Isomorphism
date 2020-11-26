@@ -46,7 +46,7 @@ class sequencer(object):
             indices.sort(key=(lambda i: hashes[i]))         ## If possible, use hashes of lists rather than lists themselves
         else:
             print("Warning: Hashes not unique, performing regular sort")
-            indices.sort(key=(lambda i: keymatrix[i]))      ## When lists are comoared instead of hashes, complexity rises
+            indices.sort(key=(lambda i: keymatrix[i]))      ## When lists are compared instead of hashes, complexity rises
 
     """
     Check if duplicates exist in a matrix
