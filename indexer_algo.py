@@ -43,7 +43,7 @@ class indexer(object):
 
         print("\nGenerating key")
 
-        self.top_count = int(3 * math.log2(self.dim))
+        self.top_count = min(int(3 * math.log2(self.dim)), self.dim)                    ## In case of tiny graphs, key = dim
         self.tops = np.argpartition(self.deg, -self.top_count)[-self.top_count:]        ## Get most connected nodes
 
         sorted_key = list(self.tops)
@@ -66,17 +66,13 @@ class indexer(object):
             print("Warning: Hashing key with degree neighbourhood")     ## Use alternative key hashing
 
             neighbourhoods = [self.get_deg_nbh(i) for i in sorted_key]  ## Sort by hashed neighborhood
+            if(indexer.check_duplicates(neighbourhoods)):               ## Ensure no further duplicates. If any, give up
+                print("Error: Algorithm Failed - Duplicate degree neighbourhood\n")
+                return -1
+
             temps = list(range(self.top_count))
             indexer.arraysort(temps, neighbourhoods)
             sorted_key = np.array(sorted_key)[temps]
-
-            # sorted_key.sort(key=(lambda i: list(self.get_deg_nbh(i))))
-            for i in range(1, self.top_count):                          ## Ensure no further duplicates. If any, give up
-                if(self.deg[sorted_key[i]] != self.deg[sorted_key[i-1]]):
-                    continue
-                if(np.array_equal(self.get_deg_nbh(sorted_key[i]), self.get_deg_nbh(sorted_key[i-1]))):
-                    print("Error: Algorithm Failed - Duplicate degree neighbourhood\n")
-                    return -1
         
         self.key_indices = sorted_key
         print("Key generated")
