@@ -1,6 +1,5 @@
 import numpy as np
 import time
-from matplotlib import pyplot as plt
 from verify import check_match
 from indexer_algo import indexer
 from sequencer_algo import sequencer
@@ -16,6 +15,8 @@ Generate a set of graphs to experiment with
 """
 Plot performance with graphs in steps of 1000, till 10000
 """
+
+# from matplotlib import pyplot as plt
 
 # sizes = list(range(0, 10001, 1000))
 # times = [0 for i in range(11)]
@@ -51,8 +52,10 @@ Experiment with individual graphs
 # g1 = np.load("graph_rvtqwhqjdl_10000_0.3_v1.npy")
 # g2 = np.load("graph_rvtqwhqjdl_10000_0.3_v2.npy")
 
-g1 = np.load("graph_soeuxrtioh_10000_0.5_v1.npy")
-g2 = np.load("graph_soeuxrtioh_10000_0.5_v2.npy")
+# g1 = np.load("graph_soeuxrtioh_10000_0.5_v1.npy")
+# g2 = np.load("graph_soeuxrtioh_10000_0.5_v2.npy")
+
+g1, g2 = generate_pair(30, 0.2)
 
 start = time.time()
 
