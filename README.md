@@ -8,6 +8,8 @@ Major changes to algorithm -
 * Hash based sorting in place of sorting by arrays
 * Use of backup key based on degree neighborhood in case of key failure, for Paper 1 (indexer)
 
+Sample Usage - main.py
+
 Individual files -
 * generator.py - generates random graphs, isomorphic pairs, saves these, or loads adjacency matrices from regular text files
 * indexer_algo.py - contains class indexer, implmenting paper 1 above
